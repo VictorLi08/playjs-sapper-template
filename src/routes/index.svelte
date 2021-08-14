@@ -1,5 +1,5 @@
 <script>
-	import successkid from 'images/successkid.jpg';
+	import SapperLogo from 'images/sapper-logo-horizontal.svg';
 </script>
 
 <style>
@@ -40,10 +40,10 @@
 	<title>Sapper project template</title>
 </svelte:head>
 
-<h1>Great success!</h1>
+<h1>Ready for world domination.</h1>
 
 <figure>
-	<img alt="Success Kid" src="{successkid}">
+	<img alt="Eh" src="{SapperLogo}">
 	<figcaption>Have fun with Sapper!</figcaption>
 </figure>
 
