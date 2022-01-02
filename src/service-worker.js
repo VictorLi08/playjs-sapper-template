@@ -1,4 +1,8 @@
-import {timestamp, files, shell} from '@sapper/service-worker';
+import {
+  timestamp,
+  files,
+  shell
+} from '@sapper/service-worker';
 
 const ASSETS = `cache${timestamp}`;
 
@@ -51,7 +55,10 @@ async function fetchAndCache(request) {
 }
 
 self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET' || event.request.headers.has('range'))
+  if (
+    event.request.method !== 'GET' ||
+    event.request.headers.has('range')
+  )
     return;
 
   const url = new URL(event.request.url);
@@ -59,20 +66,28 @@ self.addEventListener('fetch', event => {
   // don't try to handle e.g. data: URIs
   const isHttp = url.protocol.startsWith('http');
   const isDevServerRequest =
-    url.hostname === self.location.hostname && url.port !== self.location.port;
+    url.hostname === self.location.hostname &&
+    url.port !== self.location.port;
   const isStaticAsset =
-    url.host === self.location.host && staticAssets.has(url.pathname);
+    url.host === self.location.host &&
+    staticAssets.has(url.pathname);
   const skipBecauseUncached =
-    event.request.cache === 'only-if-cached' && !isStaticAsset;
+    event.request.cache === 'only-if-cached' &&
+    !isStaticAsset;
 
-  if (isHttp && !isDevServerRequest && !skipBecauseUncached) {
+  if (
+    isHttp &&
+    !isDevServerRequest &&
+    !skipBecauseUncached
+  ) {
     event.respondWith(
       (async () => {
         // always serve static files and bundler-generated assets from cache.
         // if your application has other URLs with data that will never change,
         // set this variable to true for them and they will only be fetched once.
         const cachedAsset =
-          isStaticAsset && (await caches.match(event.request));
+          isStaticAsset &&
+          (await caches.match(event.request));
 
         // for pages, you might want to serve a shell `service-worker-index.html` file,
         // which Sapper has generated for you. It's not right for every
@@ -83,7 +98,9 @@ self.addEventListener('fetch', event => {
 				}
 				*/
 
-        return cachedAsset || fetchAndCache(event.request);
+        return (
+          cachedAsset || fetchAndCache(event.request)
+        );
       })()
     );
   }

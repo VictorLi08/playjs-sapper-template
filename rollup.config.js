@@ -14,7 +14,8 @@ const dev = mode === 'development';
 const legacy = !!process.env.SAPPER_LEGACY_BUILD;
 
 const onwarn = (warning, onwarn) =>
-  (warning.code === 'MISSING_EXPORT' && /'preload'/.test(warning.message)) ||
+  (warning.code === 'MISSING_EXPORT' &&
+    /'preload'/.test(warning.message)) ||
   (warning.code === 'CIRCULAR_DEPENDENCY' &&
     /[/\\]@sapper[/\\]/.test(warning.message)) ||
   onwarn(warning);
@@ -38,7 +39,10 @@ export default {
         }
       }),
       url({
-        sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+        sourceDir: path.resolve(
+          __dirname,
+          'src/node_modules/images'
+        ),
         publicPath: '/client/'
       }),
       resolve({
@@ -101,7 +105,10 @@ export default {
         emitCss: false
       }),
       url({
-        sourceDir: path.resolve(__dirname, 'src/node_modules/images'),
+        sourceDir: path.resolve(
+          __dirname,
+          'src/node_modules/images'
+        ),
         publicPath: '/client/',
         emitFiles: false // already emitted by client build
       }),
