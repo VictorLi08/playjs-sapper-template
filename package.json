@@ -3,10 +3,10 @@
   "version": "0.0.1",
   "scripts": {
     "dev": "sapper dev",
-    "build": "sapper build --legacy",
-    "export": "sapper export --legacy",
-    "serve": "node __sapper__/build",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "site:build": "sapper build --legacy",
+    "site:export": "sapper export --legacy",
+    "site:serve": "node __sapper__/build"
   },
   "dependencies": {
     "compression": "^1.7.1",
